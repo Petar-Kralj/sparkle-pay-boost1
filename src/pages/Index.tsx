@@ -5,8 +5,6 @@ import { Mail, Search, Users, Zap, Shield, Globe, ArrowRight, Check } from 'luci
 import { useAuth } from '@/hooks/useAuth';
 import logo from '@/assets/logo.png';
 
-const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/8x228r9hRfo73B26C37Zu0c';
-
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
@@ -67,14 +65,28 @@ const Index = () => {
             Fonatica helps you discover verified business and personal email addresses instantly. 
             Power your outreach with accurate contact data.
           </motion.p>
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3}
-            className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="text-base px-8 bg-primary hover:bg-primary/90 glow">
-                Subscribe Now — $125/mo <ArrowRight className="w-4 h-4" />
-              </Button>
-            </a>
+          
+          {/* DISABLED SUBSCRIBE BUTTON + WARNING */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <Button 
+              size="lg" 
+              className="text-base px-8 opacity-60 cursor-not-allowed border-red-500/50 bg-red-950/30 hover:opacity-60"
+              disabled
+            >
+              Subscriptions temporarily unavailable
+            </Button>
+          </div>
+          <motion.div 
+            variants={fadeUp} 
+            initial="hidden" 
+            animate="visible" 
+            custom={3}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-red-900/50 bg-red-950/30 text-sm text-muted-foreground max-w-2xl mx-auto"
+          >
+            <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse" />
+            Sign-ups temporarily unavailable. We'll be back soon!
           </motion.div>
+          
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4}
             className="mt-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border/50 glass text-sm text-muted-foreground">
             <Zap className="w-4 h-4 text-accent" />
@@ -144,11 +156,14 @@ const Index = () => {
                 </li>
               ))}
             </ul>
-            <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" className="block">
-              <Button className="w-full text-base" size="lg">
-                Get Started <ArrowRight className="w-4 h-4" />
-              </Button>
-            </a>
+            {/* DISABLED PRICING BUTTON */}
+            <Button 
+              className="w-full text-base opacity-60 cursor-not-allowed border-red-500/50 bg-red-950/30 hover:opacity-60" 
+              size="lg"
+              disabled
+            >
+              Subscriptions temporarily unavailable
+            </Button>
           </motion.div>
         </div>
       </section>
@@ -161,8 +176,8 @@ const Index = () => {
             <span>Fonatica</span>
           </div>
           <p>© {new Date().getFullYear()} Fonatica. All rights reserved.</p>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 };
